@@ -122,7 +122,7 @@ if [ "$WEB_SRV" = "apache" ]; then
 		# Workaroung for RHEL placing logs inside etc
 		# rsync -rL --exclude=logs /etc/httpd/ $ZEND_DATA_TMPDIR/apache_config
 		mkdir $ZEND_DATA_TMPDIR/apache_config
-		tar --exclude='logs' --exclude='modules' cf - /etc/httpd | tar -C $ZEND_DATA_TMPDIR/apache_config -xf -
+		tar --exclude='logs' --exclude='modules' -cf - /etc/httpd | tar --strip-components=2 -C $ZEND_DATA_TMPDIR/apache_config -xf -
 	elif [ -d /etc/apache ]; then
 		cp -RL /etc/apache $ZEND_DATA_TMPDIR/apache_config
 	elif [ -d /etc/apache2 ]; then
