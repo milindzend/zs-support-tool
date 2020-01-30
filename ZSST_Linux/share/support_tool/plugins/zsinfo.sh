@@ -123,10 +123,13 @@ if [ "$WEB_SRV" = "apache" ]; then
 		# rsync -rL --exclude=logs /etc/httpd/ $ZEND_DATA_TMPDIR/apache_config
 		mkdir $ZEND_DATA_TMPDIR/apache_config
 		tar --exclude='logs' --exclude='modules' -cf - /etc/httpd | tar --strip-components=2 -C $ZEND_DATA_TMPDIR/apache_config -xf -
+		ls -RAlF /etc/httpd > $ZEND_DATA_TMPDIR/apache_config/apache_dir.txt
 	elif [ -d /etc/apache ]; then
 		cp -RL /etc/apache $ZEND_DATA_TMPDIR/apache_config
+		ls -RAlF /etc/apache > $ZEND_DATA_TMPDIR/apache_config/apache_dir.txt
 	elif [ -d /etc/apache2 ]; then
 		cp -RL /etc/apache2 $ZEND_DATA_TMPDIR/apache_config
+		ls -RAlF /etc/apache2 > $ZEND_DATA_TMPDIR/apache_config/apache_dir.txt
 	else
 		echo "Apache configuration not found" >> ${ZEND_ERROR_LOG}
 	fi
@@ -137,6 +140,7 @@ elif [ "$WEB_SRV" = "nginx" ]; then
 	# nginx configuration
 	if [ -d /etc/nginx ]; then
 		cp -RL /etc/nginx $ZEND_DATA_TMPDIR/nginx_config
+		ls -RAlF /etc/nginx $ZEND_DATA_TMPDIR/nginx_config/nginx_dir.txt
 	else
 		echo "nginx configuration not found" >> ${ZEND_ERROR_LOG}
 	fi
