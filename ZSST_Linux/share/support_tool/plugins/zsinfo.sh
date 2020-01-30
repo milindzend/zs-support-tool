@@ -140,7 +140,7 @@ elif [ "$WEB_SRV" = "nginx" ]; then
 	# nginx configuration
 	if [ -d /etc/nginx ]; then
 		cp -RL /etc/nginx $ZEND_DATA_TMPDIR/nginx_config
-		ls -RAlF /etc/nginx $ZEND_DATA_TMPDIR/nginx_config/nginx_dir.txt
+		ls -RAlF /etc/nginx > $ZEND_DATA_TMPDIR/nginx_config/nginx_dir.txt
 	else
 		echo "nginx configuration not found" >> ${ZEND_ERROR_LOG}
 	fi
